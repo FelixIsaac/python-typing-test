@@ -12,7 +12,7 @@ def generateParagraph():
         for i in range(15):
             paragraph += random.choice(wordlist) + " "
 
-        return paragraph
+        return paragraph.strip()
     except:
         from nltk import download
 
@@ -25,13 +25,13 @@ def show_results():
 
     # Calculate accuracy
     count = 0
-
+    
     for i, c in enumerate(paragraph):
-        try:
+        typed_length = len(typed)
+        
+        if i < typed_length:
             if typed[i] == c:
                 count += 1
-        except:
-            pass
         
     accuracy = count / len(paragraph)*100
 
@@ -46,6 +46,6 @@ def show_results():
 os.system('cls')
 time_start = time.time()
 paragraph = generateParagraph()
-print(paragraph)
-typed = input()
+print(paragraph + "\n\n\nType:")
+typed = input().strip()
 print(show_results())
